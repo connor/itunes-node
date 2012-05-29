@@ -1,0 +1,19 @@
+{
+  "author": "Connor Montgomery <c@cnnr.me> (http://cnnr.me)",
+  "name": "itunes-search",
+  "description": "search against iTunes",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/connor/itunes-node"
+  },
+  "main": "lib/itunes",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+      "request" : "2.9.200"
+  }
+}
