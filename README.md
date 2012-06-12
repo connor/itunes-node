@@ -3,6 +3,12 @@ itunes-node
 
 search against iTunes using nodejs
 
+## installation
+
+```js
+npm install itunes-search
+```
+
 ## example
 
 ```js
