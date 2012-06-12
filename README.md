@@ -30,8 +30,7 @@ var options = {
   , limit: 25
 }
 
-itunes.search( "field of dreams", options,
-function(response) {
+itunes.search( "field of dreams", options, function(response) {
   // do stuff with 'response'
 })
 
