@@ -2,7 +2,7 @@
   "author": "Connor Montgomery <c@cnnr.me> (http://cnnr.me)",
   "name": "itunes-search",
   "description": "search against iTunes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "url": "https://github.com/connor/itunes-node"
   },
