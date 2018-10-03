@@ -1,7 +1,14 @@
 itunes-node
 ===========
 
-Search against iTunes using nodejs.
+[![npm](https://img.shields.io/npm/dt/itunes-search.svg?style=flat-square)](https://www.npmjs.com/package/itunes-search)
+![Travis (.org)](https://img.shields.io/travis/:user/:repo.svg?style=flat-square)
+
+## About
+
+Search against [iTunes](https://www.apple.com/itunes/) using [nodejs](https://nodejs.org/).
+
+[TypeScript](https://www.typescriptlang.org/) compatible :3
 
 ## Installation
 
@@ -13,48 +20,40 @@ npm install itunes-search
 
 [API Search reference](http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searching)
 
-```js
-var itunes = require('itunes-search');
+```ts
+import { search } from 'itunes-search';
 
-var options = {
-	 term: "field of dreams"
- , media: "movie" // options are: podcast, music, musicVideo, audiobook, shortFilm, tvShow, software, ebook, all
- , entity: "movie"
- , attribute: "movieTerm"
- , limit: 50
- , explicit: "No" // explicit material
- , country: "CA" // default US
+const options = {
+	term: 'field of dreams',
+	media: 'movie', // options are: podcast, music, musicVideo, audiobook, shortFilm, tvShow, software, ebook, all
+	entity: 'movie',
+	attribute: 'movieTerm',
+	limit: 50,
+	explicit: 'No', // explicit material
+	country: 'CA' // default US
 };
 
-itunes.search(options, function(err, response) {
-	if (err) {
-		console.log(err);
-	} else {
-		console.log(response);
-	}  
-});
+search(options).then(console.log).catch(console.error);
 ```
 
 ## Lookup
 
 [API Lookup reference](http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#lookup)
 
-```js
-var itunes = require('itunes-search');
+```ts
+import { lookup } from 'itunes-search';
 
-var options = {
-   id: 481473944
- , entity: "album"
- , limit: 25
- , sort: "recent"
- , country: "CA" // default US
+const options = {
+   id: 481473944,
+   entity: "album",
+   limit: 25,
+   sort: "recent",
+   country: "CA" // default US
 };
 
-itunes.lookup(options, function(err, response) {
-	if (err) {
-		console.log(err);
-	} else {
-		console.log(response);
-	}  
-});
+lookup(options).then(console.log).catch(console.error);
 ```
+
+# Examples
+
+To see it more, just seek other examples in [tests](./tests) folder.
