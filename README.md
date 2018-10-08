@@ -3,10 +3,10 @@ itunes-node
 
 [![npm](https://img.shields.io/npm/v/itunes-search.svg?style=flat-square)](https://www.npmjs.com/package/itunes-search)
 [![npm](https://img.shields.io/npm/dt/itunes-search.svg?style=flat-square)](https://www.npmjs.com/package/itunes-search)
-[![Travis Status](https://img.shields.io/travis/Fazendaaa/itunes-search.svg?style=flat-square)](https://travis-ci.org/Fazendaaa/itunes-search)
-[![Dependencies](https://david-dm.org/Fazendaaa/itunes-search.svg?style=flat-square)](https://github.com/Fazendaaa/itunes-search/blob/master/package.json)
-[![Codecov Status](https://img.shields.io/codecov/c/github/Fazendaaa/itunes-search/badge.svg?style=flat-square)](https://codecov.io/gh/Fazendaaa/itunes-search)
-[![Maintainability](https://api.codeclimate.com/v1/badges/04c334bbe522d8a0823f/maintainability)](https://codeclimate.com/github/Fazendaaa/itunes-search/maintainability)
+[![Travis Status](https://img.shields.io/travis/Fazendaaa/itunes-node.svg?style=flat-square)](https://travis-ci.org/Fazendaaa/itunes-node)
+[![Dependencies](https://david-dm.org/Fazendaaa/itunes-node.svg?style=flat-square)](https://github.com/Fazendaaa/itunes-node/blob/master/package.json)
+[![Codecov Status](https://img.shields.io/codecov/c/github/Fazendaaa/itunes-node/badge.svg?style=flat-square)](https://codecov.io/gh/Fazendaaa/itunes-node)
+[![Maintainability](https://api.codeclimate.com/v1/badges/04c334bbe522d8a0823f/maintainability)](https://codeclimate.com/github/Fazendaaa/itunes-node/maintainability)
 
 ## About
 
