@@ -1,4 +1,4 @@
-import { iTunesLookup, lookup } from '../src';
+import { iTunesLookup, lookup } from 'itunes-search';
 
 jest.setTimeout(10000);
 
@@ -11,8 +11,8 @@ describe('Testing lookup', () => {
         };
         const output = {
             resultCount: 2,
-            results:
-                [{
+            results: [
+                {
                     wrapperType: 'artist',
                     artistType: 'Artist',
                     artistName: 'Giraffage',
@@ -45,7 +45,8 @@ describe('Testing lookup', () => {
                     currency: 'USD',
                     releaseDate: '2011-11-17T08:00:00Z',
                     primaryGenreName: 'Electronic'
-                }]
+                }
+            ]
         };
 
         return expect(lookup(options)).resolves.toEqual(output);

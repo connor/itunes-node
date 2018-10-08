@@ -7,12 +7,13 @@
     "url": "https://github.com/connor/itunes-node"
   },
   "scripts": {
-    "build": "tsc",
-    "test": "jest --config jest.config.json --ci --runInBand --detectOpenHandles --forceExit --no-cache",
-    "lint": "tslint --config tslint.json --project ."
+    "build": "webpack",
+    "doc": "typedoc --out ./API/ ./src/",
+    "lint": "tslint --config tslint.json --project .",
+    "test": "jest --config jest.config.json --ci --runInBand --detectOpenHandles --forceExit --no-cache"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "main": "dist/itunes-search.js",
+  "types": "dist/itunes-search.d.ts",
   "keywords": [
     "api",
     "iTunes",
@@ -24,15 +25,28 @@
   "devDependencies": {
     "@types/jest": "^23.3.3",
     "@types/node": "^10.11.3",
+    "@types/webpack": "^4.4.14",
     "codecov": "^3.1.0",
+    "husky": "^1.1.1",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.1",
+    "ts-loader": "^5.2.1",
+    "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-microsoft-contrib": "^5.2.1",
-    "typescript": "^3.1.1"
+    "typedoc": "^0.12.0",
+    "typescript": "^3.1.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   },
   "optionalDependencies": {},
   "engines": {
     "node": "*"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run build && npm run doc && npm test"
+    }
   }
 }

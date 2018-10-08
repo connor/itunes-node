@@ -19,6 +19,7 @@
         "no-empty-interface": false,
         "no-relative-imports": false,
         "no-floating-promises": false,
+        "prefer-method-signature": false,
         "no-implicit-dependencies": false,
         "match-default-export-name": false,
         "mocha-no-side-effect-code": false,

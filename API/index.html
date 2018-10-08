@@ -1,0 +1,311 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>itunes-search</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">itunes-search</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> itunes-search</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="itunes-node">itunes-node</h1>
+				<p><a href="https://www.npmjs.com/package/itunes-search"><img src="https://img.shields.io/npm/v/itunes-search.svg?style=flat-square" alt="npm"></a>
+					<a href="https://www.npmjs.com/package/itunes-search"><img src="https://img.shields.io/npm/dt/itunes-search.svg?style=flat-square" alt="npm"></a>
+					<a href="https://travis-ci.org/Fazendaaa/itunes-search"><img src="https://img.shields.io/travis/Fazendaaa/itunes-search.svg?style=flat-square" alt="Travis Status"></a>
+					<a href="https://github.com/Fazendaaa/itunes-search/blob/master/package.json"><img src="https://david-dm.org/Fazendaaa/itunes-search.svg?style=flat-square" alt="Dependencies"></a>
+					<a href="https://codecov.io/gh/Fazendaaa/itunes-search"><img src="https://img.shields.io/codecov/c/github/Fazendaaa/itunes-search/badge.svg?style=flat-square" alt="Codecov Status"></a>
+				<a href="https://codeclimate.com/github/Fazendaaa/itunes-search/maintainability"><img src="https://api.codeclimate.com/v1/badges/04c334bbe522d8a0823f/maintainability" alt="Maintainability"></a></p>
+				<h2 id="about">About</h2>
+				<p>Search against <a href="https://www.apple.com/itunes/">iTunes</a> using <a href="https://nodejs.org/">nodejs</a>. <a href="https://www.typescriptlang.org/">TypeScript</a> compatible :3</p>
+				<h2 id="installation">Installation</h2>
+				<pre><code class="language-js">npm install itunes-search --save</code></pre>
+				<p><strong>note</strong>: no need of installing <em>@types/itunes-search</em> or anything like it since typings are linked in <a href="./package.json">package.json</a>.</p>
+				<h2 id="search">Search</h2>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { search } <span class="hljs-keyword">from</span> <span class="hljs-string">'itunes-search'</span>;
+
+<span class="hljs-keyword">const</span> options = {
+    limit: <span class="hljs-number">50</span>,
+    country: <span class="hljs-string">'CA'</span>,
+    explicit: <span class="hljs-string">'No'</span>,
+    media: <span class="hljs-string">'movie'</span>,
+    entity: <span class="hljs-string">'movie'</span>,
+    attribute: <span class="hljs-string">'movieTerm'</span>,
+    term: <span class="hljs-string">'field of dreams'</span>
+};
+
+search(options)
+    .then(<span class="hljs-built_in">console</span>.log)
+    .catch(<span class="hljs-built_in">console</span>.error);
+
+<span class="hljs-keyword">const</span> asyncSearchMovie = <span class="hljs-keyword">async</span> (term: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+    <span class="hljs-keyword">const</span> movie = search({
+        term,
+        country: <span class="hljs-string">'CA'</span>,
+        media: <span class="hljs-string">'movie'</span>
+    });
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`I found the following movie while searching for \"<span class="hljs-subst">${term}</span>"\:\n<span class="hljs-subst">${movie}</span>`</span>);
+};
+
+asyncSearchMovie(<span class="hljs-string">'field of dreams'</span>);</code></pre>
+				<h2 id="lookup">Lookup</h2>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { lookup } <span class="hljs-keyword">from</span> <span class="hljs-string">'itunes-search'</span>;
+
+<span class="hljs-keyword">const</span> options = {
+    limit: <span class="hljs-number">25</span>,
+    id: <span class="hljs-number">481473944</span>,
+    country: <span class="hljs-string">'CA'</span>,
+    sort: <span class="hljs-string">'recent'</span>,
+    entity: <span class="hljs-string">'album'</span>
+};
+
+lookup(options)
+    .then(<span class="hljs-built_in">console</span>.log)
+    .catch(<span class="hljs-built_in">console</span>.error);
+
+
+<span class="hljs-keyword">const</span> asyncLookupAlbum = <span class="hljs-keyword">async</span> (id: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+    <span class="hljs-keyword">const</span> album = lookup({
+        id,
+        limit: <span class="hljs-number">25</span>,
+        country: <span class="hljs-string">'CA'</span>,
+        sort: <span class="hljs-string">'recent'</span>,
+        entity: <span class="hljs-string">'album'</span>
+    });
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`I found the following album while searching for \"<span class="hljs-subst">${term}</span>"\:\n<span class="hljs-subst">${album}</span>`</span>);
+};
+
+asyncLookupAlbum(<span class="hljs-number">481473944</span>);</code></pre>
+				<h2 id="examples">Examples</h2>
+				<p>To see it more, just seek other examples in <a href="./tests">tests</a> folder.</p>
+				<h2 id="api">API</h2>
+				<p><code>search</code>:</p>
+				<ul>
+					<li>term: The URL-encoded text string you want to search for. For example: <em>Jack Johnson</em>.</li>
+					<li>country (optional): The <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">two-letter country code</a> for the store you want to search. The search uses the default store front for the specified country. For example: <em>US</em>. The default is <strong>US</strong>.</li>
+					<li>media (optional): The media type you want to search for. For example: <em>movie</em>. The default is <strong>all</strong>.</li>
+					<li>entity (optional): The type of results you want returned, relative to the specified media type. For example: <em>movieArtist</em> for a movie media type search. The default is the track entity associated with the specified media type.</li>
+					<li>attribute (optional): The attribute you want to search for in the stores, relative to the specified media type.</li>
+					<li>limit (optional): The number of search results you want the iTunes Store to return. For example: <em>25</em>.The default is <strong>50</strong>.</li>
+					<li>lang (optional): The language, English or Japanese, you want to use when returning search results. Specify the language using the five-letter codename. For example: en_us.The default is en_us (<strong>English</strong>).</li>
+					<li>version (optional): The search result key version you want to receive back from your search. The default is <strong>2</strong>.</li>
+					<li>explicit (optional): A flag indicating whether or not you want to include explicit content in your search results. The default is <strong>Yes</strong>.</li>
+				</ul>
+				<p><code>lookup</code>:</p>
+				<ul>
+					<li>id (optional): iTunes id.</li>
+					<li>upc (optional): <a href="https://en.wikipedia.org/wiki/Universal_Product_Code">Universal Product Code</a>.</li>
+					<li>isbn (optional): <a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number">International Standard Book Number</a>.</li>
+					<li>limit (optional): The number of search results you want the iTunes Store to return. For example: <em>25</em>.The default is <strong>50</strong>.</li>
+					<li>entity (optional): The type of results you want returned, relative to the specified media type. For example: <em>movieArtist</em> for a movie media type search. The default is the track entity associated with the specified media type.</li>
+					<li>amgVideoId (optional): <a href="https://en.wikipedia.org/wiki/AllMusic">AllMusic</a> is previously known as All Music Guide or AMG.</li>
+					<li>amgAlbumId (optional): <a href="https://en.wikipedia.org/wiki/AllMusic">AllMusic</a> is previously known as All Music Guide or AMG.</li>
+					<li>amgArtistId (optional): <a href="https://en.wikipedia.org/wiki/AllMusic">AllMusic</a> is previously known as All Music Guide or AMG.</li>
+				</ul>
+				<p><strong>note</strong>: all fields are optional bu at least one must be provided.</p>
+				<h3 id="types">Types</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>media</th>
+							<th>entity</th>
+							<th>attribute</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>movie</td>
+							<td>movieArtist, movie</td>
+							<td>actorTerm, genreIndex, artistTerm, shortFilmTerm, producerTerm, ratingTerm, directorTerm, releaseYearTerm, featureFilmTerm, movieArtistTerm, movieTerm, ratingIndex, descriptionTerm</td>
+						</tr>
+						<tr>
+							<td>podcast</td>
+							<td>podcastAuthor, podcast</td>
+							<td>titleTerm, languageTerm, authorTerm, genreIndex, artistTerm, ratingIndex, keywordsTerm, descriptionTerm</td>
+						</tr>
+						<tr>
+							<td>music</td>
+							<td>musicArtist, musicTrack, album, musicVideo, mix, song</td>
+							<td>mixTerm, genreIndex, artistTerm, composerTerm, albumTerm, ratingIndex, songTerm</td>
+						</tr>
+						<tr>
+							<td>musicVideo</td>
+							<td>musicArtist, musicVideo</td>
+							<td>genreIndex, artistTerm, albumTerm, ratingIndex, songTerm</td>
+						</tr>
+						<tr>
+							<td>audiobook</td>
+							<td>audiobookAuthor, audiobook</td>
+							<td>titleTerm, authorTerm, genreIndex, ratingIndex</td>
+						</tr>
+						<tr>
+							<td>shortFilm</td>
+							<td>shortFilmArtist, shortFilm</td>
+							<td>genreIndex, artistTerm, shortFilmTerm, ratingIndex, descriptionTerm</td>
+						</tr>
+						<tr>
+							<td>tvShow</td>
+							<td>tvEpisode, tvSeason</td>
+							<td>genreIndex, tvEpisodeTerm, showTerm, tvSeasonTerm, ratingIndex, descriptionTerm</td>
+						</tr>
+						<tr>
+							<td>software</td>
+							<td>software, iPadSoftware, macSoftware</td>
+							<td>softwareDeveloper</td>
+						</tr>
+						<tr>
+							<td>ebook</td>
+							<td>ebook</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>all</td>
+							<td>movie, album, allArtist, podcast, musicVideo, mix, audiobook, tvSeason, allTrack</td>
+							<td>actorTerm, languageTerm, allArtistTerm, tvEpisodeTerm, shortFilmTerm, directorTerm, releaseYearTerm, titleTerm, featureFilmTerm, ratingIndex, keywordsTerm, descriptionTerm, authorTerm, genreIndex, mixTerm, allTrackTerm, artistTerm, composerTerm, tvSeasonTerm, producerTerm, ratingTerm, songTerm, movieArtistTerm, showTerm, movieTerm, albumTerm</td>
+						</tr>
+				</tbody></table>
+				<p><strong>note</strong>: Please note that <strong>musicTrack</strong> can include both songs and music videos in the results</p>
+				<p>To see more, just read the <a href="https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/">iTunes Docs</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_itunes_search_.html">"itunes-<wbr>search"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

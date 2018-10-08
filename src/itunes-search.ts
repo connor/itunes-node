@@ -8,6 +8,12 @@ interface IMakeRequest {
 
 interface IGenerateUrl extends IMakeRequest { }
 
+interface HandleRequest {
+    readonly response: IncomingMessage;
+    readonly reject: (data: Error) => void;
+    readonly resolve: (data: iTunesResponse) => void;
+}
+
 export type Media = 'all' |
                     'ebook' |
                     'movie' |
@@ -19,6 +25,56 @@ export type Media = 'all' |
                     'shortFilm' |
                     'musicVideo';
 
+export type Entity = 'mix' |
+                     'song' |
+                     'movie' |
+                     'ebook' |
+                     'album' |
+                     'podcast' |
+                     'allTrack' |
+                     'tvSeason' |
+                     'software' |
+                     'allArtist' |
+                     'audiobook' |
+                     'shortFilm' |
+                     'tvEpisode' |
+                     'musicVideo' |
+                     'musicTrack' |
+                     'musicArtist' |
+                     'macSoftware' |
+                     'movieArtist' |
+                     'iPadSoftware' |
+                     'podcastAuthor' |
+                     'audiobookAuthor' |
+                     'shortFilmArtist';
+
+export type Attribute = 'mixTerm' |
+                        'showTerm' |
+                        'albumTerm' |
+                        'actorTerm' |
+                        'titleTerm' |
+                        'movieTerm' |
+                        'genreIndex' |
+                        'artistTerm' |
+                        'authorTerm' |
+                        'ratingTerm' |
+                        'ratingIndex' |
+                        'allTrackTerm' |
+                        'tvSeasonTerm' |
+                        'composerTerm' |
+                        'producerTerm' |
+                        'directorTerm' |
+                        'languageTerm' |
+                        'keywordsTerm' |
+                        'allArtistTerm' |
+                        'tvEpisodeTerm' |
+                        'shortFilmTerm' |
+                        'movieArtistTerm' |
+                        'releaseYearTerm' |
+                        'featureFilmTerm' |
+                        'descriptionTerm' |
+                        'softwareDeveloper';
+
 export type Explicit = 'No' | 'Yes';
 
 export interface iTunesSearch {
@@ -27,10 +83,10 @@ export interface iTunesSearch {
     readonly lang?: string;
     readonly limit?: number;
     readonly country: string;
-    readonly entity?: string;
+    readonly entity?: Entity;
     readonly version?: number;
-    readonly attribute?: string;
     readonly explicit?: Explicit;
+    readonly attribute?: Attribute;
 }
 
 export interface iTunesLookup {
@@ -38,7 +94,7 @@ export interface iTunesLookup {
     readonly upc?: number;
     readonly isbn?: number;
     readonly limit?: number;
-    readonly entity?: string;
+    readonly entity?: Entity;
     readonly amgVideoId?: number;
     readonly amgAlbumId?: number;
     readonly amgArtistId?: number;
@@ -92,7 +148,7 @@ const removeCallback = (input: string): string => {
     return first.replace(');', '');
 };
 
-const handleRequest = (resolve: (data: iTunesResponse) => void, reject: (data: Error) => void, response: IncomingMessage): void => {
+const handleRequest = ({ response, reject, resolve }: HandleRequest): void => {
     let chunk = '';
     const { statusCode } = response;
 
@@ -100,21 +156,24 @@ const handleRequest = (resolve: (data: iTunesResponse) => void, reject: (data: E
         reject(new Error('Bad response from iTunes server'));
     }
 
-    response.setEncoding('utf8')
-            .on('error', reject)
-            .on('uncaughtException', reject)
-            .on('data', (data: string) => chunk += data)
-            .on('end', () => resolve(JSON.parse(removeCallback(chunk))));
+    response
+        .setEncoding('utf8')
+        .on('error', reject)
+        .on('uncaughtException', reject)
+        .on('data', (data: string) => chunk += data)
+        .on('end', () => {
+            resolve(JSON.parse(removeCallback(chunk)));
+        });
 };
 
 const makeRequest = async ({ kind, options }: IMakeRequest): Promise<iTunesResponse> => {
     return new Promise((resolve: (data: iTunesResponse) => void, reject: (data: Error) => void) => {
-        const request = get(generateURL({ kind, options }));
-        const curriedHandleRequest = ((response: IncomingMessage) => handleRequest(resolve, reject, response));
-
-        request.on('error', () => reject(new Error('Request error')));
-        request.on('response', curriedHandleRequest);
-        request.end();
+        get(generateURL({ kind, options }))
+            .on('response', ((response: IncomingMessage) => {
+                handleRequest({ resolve, reject, response });
+            }))
+            .on('error', reject)
+            .end();
     });
 };
 

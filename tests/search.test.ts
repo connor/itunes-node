@@ -1,4 +1,4 @@
-import { iTunesSearch, search } from '../src';
+import { iTunesSearch, search } from 'itunes-search';
 
 jest.setTimeout(10000);
 
@@ -30,7 +30,7 @@ describe('Testing search', () => {
                     currency: 'CAD',
                     kind: 'feature-movie',
                     longDescription: '\"If you build it, he will come.\" With these words, Iowa farmer Ray Kinsella (Kevin Costner) is inspired by a voice he can\'t ignore to pursue a dream he can hardly believe. Also starring Ray Liotta, James Earl Jones, and Amy Madigan, Field of Dreams is an extraordinary and unforgettable experience that has moved critics and audiences like no other film of its generation. Field of Dreams is a glowing tribute to all who dare to dream.',
-                    previewUrl: 'http://video.itunes.apple.com/apple-assets-us-std-000001/Video118/v4/40/1a/8a/401a8a76-e7f1-5127-06bf-4ba243e9171a/mzvf_7952018799658673202.640x352.h264lc.U.p.m4v',
+                    previewUrl: 'https://video-ssl.itunes.apple.com/apple-assets-us-std-000001/Video118/v4/40/1a/8a/401a8a76-e7f1-5127-06bf-4ba243e9171a/mzvf_7952018799658673202.640x352.h264lc.U.p.m4v',
                     //  tslint:enable
                     primaryGenreName: 'Drama',
                     releaseDate: '1989-04-21T07:00:00Z',

@@ -1,8 +1,13 @@
+API/
 coverage/
 node_modules/
 src/
 tests/
+_config.yml
 .gitignore
+.travis.yml
 jest.config.json
 tsconfig.json
 tslint.json
+pacakge-lock.json
+webpack.config.ts
