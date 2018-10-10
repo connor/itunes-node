@@ -82,8 +82,8 @@ export interface iTunesSearch {
     readonly media?: Media;
     readonly lang?: string;
     readonly limit?: number;
-    readonly country: string;
     readonly entity?: Entity;
+    readonly country?: string;
     readonly version?: number;
     readonly explicit?: Explicit;
     readonly attribute?: Attribute;
