@@ -1,0 +1,42 @@
+{
+    "bail": true,
+    "expand": true,
+    "rootDir": "./",
+    "verbose": true,
+    "useStderr": true,
+    "forceExit": true,
+    "logHeapUsage": true,
+    "name": "itunes-search",
+    "collectCoverage": true,
+    "testURL": "http://localhost/",
+    "coverageDirectory": "./coverage",
+    "testRegex": "(./tests/.*| (\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "transform": {
+        "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleNameMapper": {
+        "itunes-search": "<rootDir>/src/itunes-search.ts"
+    },
+    "coveragePathIgnorePatterns": [
+        "./node_modules/",
+        "./dist/"
+    ],
+    "coverageReporters": [
+        "json",
+        "lcov",
+        "text"
+    ],
+    "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "node"
+    ],
+    "globals": {
+        "ts-jest": {
+            "diagnostics": true
+        }
+    }
+}
